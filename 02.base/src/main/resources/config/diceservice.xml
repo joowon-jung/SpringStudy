@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				xsi:schemaLocation="http://www.springframework.org/schema/beans
+													  http://www.springframework.org/schema/beans/spring-beans.xsd">												 
+												 
+     <!-- Meta-Data에 인스턴스 생성, 관계 :: DI (Dependency Injection) 등을 서술적 기술 -->
+			
+		<!-- Bean Container 가 id 값을 갖는 인스턴스 생성 및 소멸을 관리 -->	
+		<!-- DiceAImpl diceA = new DiceAImpl()과 같은 것 -->
+		<bean id="diceA" class="spring.service.dice.impl.DiceAImpl"/>
+		<bean id="diceB" class="spring.service.dice.impl.DiceBImpl"/>
+		<bean id="diceC" class="spring.service.dice.impl.DiceCImpl"/>
+		
+		<!-- Bean Container가 id 값을 갖는 인스턴스 생성 및 소멸을 관리
+			IoC Container 가 Dependency Injection 을 수행관리 -->
+		<!-- 식별성 : player01 -->
+		<bean id = "player01" class = "spring.service.dice.play.Player02">
+			<!-- instance 생성 후 dice property(Field) 에 diceA instance injection 
+				Setter Injection :: player02.setDice(diceA) -->
+			<property name = "dice">
+				<ref bean = "diceA"/>
+			</property>
+		</bean>
+		
+		<!-- Bean Container가 id 값을 갖는 인스턴스 생성 및 소멸을 관리
+			IoC Container 가 Dependency Injection 을 수행관리 -->
+		<!-- instance 생성 후 Setter Injection을 아래와 같이 정의 가능 -->
+		<bean id = "player02" class = "spring.service.dice.play.Player02">
+			<property name="dice" ref = "diceB" />
+		</bean>
+		
+		<!-- Bean Container가 id 값을 갖는 인스턴스 생성 및 소멸을 관리
+			IoC Container 가 Dependency Injection 을 수행관리 -->
+		<bean id = "player03" class = "spring.service.dice.play.Player02">
+			<!-- instance 생성 시 생성자를 이용 diceC를 인자로 전달
+				Constructor Injection :: new Player02(diceC) -->
+			<constructor-arg>
+				<ref bean = "diceC"/>
+			</constructor-arg>
+		</bean>
+		
+		<!-- Bean Container가 id 값을 갖는 인스턴스 생성 및 소멸을 관리
+			IoC Container 가 Dependency Injection 을 수행관리 -->
+		<!-- instance 생성 시 Constructor Injection을 아래와 같이 정의 가능 -->
+		<bean id = "player04" class = "spring.service.dice.play.Player02">
+			<constructor-arg ref = "diceA"/>
+		</bean>
+
+</beans>
