@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				xsi:schemaLocation="http://www.springframework.org/schema/beans
+													  http://www.springframework.org/schema/beans/spring-beans.xsd">												 
+											
+		<!-- code :: User user06 = new User(60, "6060", "60유저" -->
+		<bean id = "user06" class = "spring.service.domain.User">
+			<!-- Constructor Injection의 경우 인자 전달이 모호 :: 출력값 확인
+				모호한 생성자 인자를 다루는 2가지 방법 : index 사용 / Data Type 사용 -->
+			<constructor-arg value = "60" index = "0"/>
+			<constructor-arg value = "60유저" index = "2"/>
+			<constructor-arg value = "6060" index = "1" />
+		</bean>
+		
+		<bean id = "user07" class = "spring.service.domain.User">
+			<!-- Constructor Injection의 경우 인자 전달이 모호 :: 출력값 확인
+				모호한 생성자 인자를 다루는 2가지 방법 : index 사용 / Data Type 사용 -->
+			<constructor-arg value = "70유저" type = "java.lang.String"/>
+			<constructor-arg value = "70" type = "int"/>
+			<!-- password가 여기 없는데 어떻게? TestApp에서 메타데이터 2개 다 인자로 줬음 -->
+			<constructor-arg ref = "password" index = "1" />
+		</bean>
+		
+		<!--  Spring에서 만든 Bean. properties를 쉽게 파싱하는 역할을 한다! -->
+		<!-- Spring에서 제공하는 PropertyPlaceHolderConfigurer API 이용
+			properties Meta-data를 접근할 수 있는 기능 제공 :: Spring API 사용, 확인 -->
+		<bean id = "propertyConfigurer" 
+			class = "org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<!-- setLocation("config/userservice02.properties")와 동일. 필드에 location도 있겠지 -->
+			<property name = "location" value = "config/userservice02.properties" />
+		</bean>
+		
+		<!-- Properties 파일로 분리한 리소스는 Spring에서 제공되는
+			PropertyPlaceholderConfigurer 객체를 이용하여 사용 가능
+			대치변수 형태 ${ } 로 접근 가능하다. JSP의 EL과 유사함! -->
+		<bean id = "user08" class = "spring.service.domain.User">
+		<!-- EL로 쉽게 접근! -->
+			<property name = "age" value = "${user.age}" />
+			<property name = "userId" value = "${user.userId}" />
+			<property name = "password" value = "${user.password}" />
+		</bean>
+
+</beans>

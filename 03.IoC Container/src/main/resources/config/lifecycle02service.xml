@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+								http://www.springframework.org/schema/beans/spring-beans.xsd"
+		default-init-method = "init"
+		default-destroy-method = "destroy">
+	<!-- 선언적으로 선언하는 모든 Bean 에 init/destroy 설정없이 호출 해야 한다면,
+			beans root elements에  default-init-method = "init"
+								  default-destroy-method = "destroy"
+		선언시 init() / destroy() Method가 선언된 모든 빈에 적용됨 -->
+		
+	<bean id = "lifeCycle05" 
+		  class = "spring.service.lifecycle.LifeCycle01" />
+
+	<bean 	id = "lifeCycle06" 
+			class = "spring.service.lifecycle.LifeCycle02" 
+			factory-method="getInstance"/>
+			<!-- factory-method : 여기에 선언된 메소드로 인스턴스 받는단 얘기 -->
+</beans>

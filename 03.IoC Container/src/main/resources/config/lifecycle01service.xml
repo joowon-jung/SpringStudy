@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+								http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 
+		depend-on : bean 인스턴스 생성시 의존성 정의 (먼저 인스턴스화 할 bean 설정)
+		scope : singleton 디폴트
+		singleton : Spring IoC Container 내에서 Bean 정의 당 하나의 instance 생성
+		prototype : 요청시 새로운 인스턴스 생성 (lookup시 인스턴스화 :: lazy-loading)
+		request : Http request당 하나의 instance 생성 (Request Object Scope : Servlet/JSP)
+		session : Http Session당 하나의 instance 생성 (Session Object Scope : Servlet/JSP)
+	 -->
+	 
+	 <!-- 현업에서 id, class 빼고는 잘 안 쓰긴 함 -->
+	<bean 	id = "lifeCycle01"
+			class = "spring.service.lifecycle.LifeCycle01"
+			init-method = "init"
+			destroy-method = "destroy"
+			depends-on = "lifeCycle02, lifeCycle03"
+			scope = "singleton" />
+	
+	<bean id = "lifeCycle02" class = "spring.service.lifecycle.LifeCycle01" />
+
+	<bean id = "lifeCycle03" class = "spring.service.lifecycle.LifeCycle01" />
+
+	<bean 	id = "lifeCycle04"
+			class = "spring.service.lifecycle.LifeCycle01"
+			scope = "prototype" /> <!-- 계속 인스턴스 생성. 잘 안씀 -->
+</beans>
