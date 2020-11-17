@@ -16,11 +16,11 @@ public class MessageTestAppUseSpringAOP02 {
 		ApplicationContext context = 
 		//		new ClassPathXmlApplicationContext("/config/messageservice02.xml");
 		//		new ClassPathXmlApplicationContext("/config/messageservice03.xml");
-				new ClassPathXmlApplicationContext("/config/messageservice04.xml");
+		//		new ClassPathXmlApplicationContext("/config/messageservice04.xml");
 		//		new ClassPathXmlApplicationContext("/config/messageservice05.xml");
 		//		new ClassPathXmlApplicationContext("/config/messageservice06.xml");
 		//		new ClassPathXmlApplicationContext("/config/messageservice07.xml");			
-		//		new ClassPathXmlApplicationContext("/config/messageservice08.xml");
+				new ClassPathXmlApplicationContext("/config/messageservice08.xml");
 				
 		//==> IoC Container 로 부터 Look Up 한 인스턴스는 ProxyFactoryBean 객체가 생성해준 
 		//==> Message interface 구현한 Dynamic Proxy 
@@ -36,6 +36,8 @@ public class MessageTestAppUseSpringAOP02 {
 	    
 	    System.out.println("\n\n+++++++++++++++++++++++++++++++++++++++++++++\n\n");
 		
+	    System.out.println("=== getter method 호출 ===");
+	    
 	    System.out.println("\n리턴 받은 메세지 : "+message.getMessage());
 	}
 }//end of class
