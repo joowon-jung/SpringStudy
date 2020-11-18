@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+					xmlns="http://java.sun.com/xml/ns/javaee" 
+					xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+					metadata-complete="true" version="3.0">
+					
+	<!-- SpringMVC 에서의 Front Controller(단일인입점) 선언
+           :: servlet-name 을  action 로 정의 하면 ...
+           :: Meta-Data 는 default 로 action-servlet.xml 이 됨... -->
+    <servlet>
+        <servlet-name>action</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+        	<param-name>contextConfigLocation</param-name>
+        	<param-value>
+        	<!-- 지정 해주지 않으면 zero configuration 에 의해 action-servlet.xml 이 호출됨 -->
+        	<!-- 한개에 다 때려박지 않고 메타데이터를 모듈별로 구분하고 싶어서 이렇게 사용!  -->
+        		/WEB-INF/module01-servlet.xml , 
+        		/WEB-INF/module02-servlet.xml
+        	</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup> <!-- init-method 호출되어 action-servlet.xml 와이어링 -->
+    </servlet>
+
+	<!-- 확장자가 ~.do 경우 action servlet-name 으로 선언적이름을 갖는 Servlet 처리 -->
+    <servlet-mapping>
+        <servlet-name>action</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+    
+</web-app>

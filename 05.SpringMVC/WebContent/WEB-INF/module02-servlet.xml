@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+								 http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- 	:: Client 의 Request URI와 Controller 을 연결시켜 주는 HandlerMapping   -->
+	 <bean id="simpleUrlMapping" 
+	 			 class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	 			 						<!-- BeanNameUrlHandlerMapping 보다 이걸 더 많이 사용! -->
+	 			 
+	 	<!-- HandlerMapping을 여러개 설정 가능. 우선 순위 설정 가능 -->
+	 	<property name = "order" value = "1"/>
+	 	
+	 	<property name = "mappings">
+	 		<props> <!-- properties 파일이라고 생각! key & value 형태 -->
+	 			<prop key = "module02.do">helloSpringController</prop>
+	 		</props>
+	 	</property>
+
+	</bean>
+	
+	 <!--	:: Client 의 요구사항을 처리할  Controller 
+	 		::	http://ip:port/contextRoot/zzz.do    
+	 		:: Request 시 test.HelloSpringController 실행 -->
+	<bean id="helloSpringController" class="test.HelloSpringController" />
+
+</beans>
